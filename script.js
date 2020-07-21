@@ -112,7 +112,14 @@ for(var i=0; i<buttons.length; i++)
             display.innerText = "";
             display.innerText = val;           
         }
-
+     
+        else if (value == 99)
+        {
+            operator = null;
+            operand1 = null;
+            operand2 = null;
+            display.innerText = 0;
+        }
         
 
         else if(value == 47)
