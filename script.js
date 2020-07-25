@@ -1,8 +1,10 @@
 var buttons = document.getElementsByClassName("button");
 var display = document.getElementById("display");
+var displayTwo = document.getElementById("display-two");
 var operand1 = 0;
 var operand2 = null;
 var operator = null;
+var result = null;
 display.innerText = 0;
 
 for(var i=0; i<buttons.length; i++)
@@ -17,11 +19,13 @@ for(var i=0; i<buttons.length; i++)
             operand1 = null;
             operand2 = null;
             display.innerText = 0;
+            displayTwo.innerText = "";
         }
 
         else if(value == '+/-')
         {
-            display.innerText = -(display.innerText);           
+            display.innerText = -(display.innerText); 
+            displayTwo.innerText = -(displayTwo.innerText);           
         }
 
         else if(value == '%')
@@ -29,14 +33,16 @@ for(var i=0; i<buttons.length; i++)
             var val = parseFloat(display.innerText);
             val = val/100;
             display.innerText = "";
-            display.innerText = val;           
+            display.innerText = val;  
+            displayTwo.innerText = val;         
         }
 
         else if(value == '/')
         {
             operator = '/';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";    
+            displayTwo.innerText += '/';       
         }
 
 
@@ -44,14 +50,16 @@ for(var i=0; i<buttons.length; i++)
         {
             operator = '*';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";   
+            displayTwo.innerText += '*';             
         }
         
         else if(value == '-')
         {
             operator = '-';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";   
+            displayTwo.innerText += '-';             
         }
 
         else if (value == '+')
@@ -59,6 +67,7 @@ for(var i=0; i<buttons.length; i++)
             operator = '+';
             operand1 = parseFloat(display.innerText);
             display.innerText="";
+            displayTwo.innerText += '+';     
             
         }
 
@@ -67,18 +76,21 @@ for(var i=0; i<buttons.length; i++)
             operand2 = parseFloat(display.innerText);
              if(operator =='/' && operand2 == '0')
             {
-               var result = "error";
+                result = "error";
             }
             else
             {
-                var result = eval(operand1 + " " + operator + " " + operand2);
+                 result = eval(operand1 + " " + operator + " " + operand2);
 
             }
             display.innerText="";
+            displayTwo.innerText += '=';     
             display.innerText= result;
+            displayTwo.innerText += result;     
             operand1 = result;
             operator = null;
             operand2 = null;
+            
 
         }
 
@@ -89,12 +101,14 @@ for(var i=0; i<buttons.length; i++)
             }
 
             display.innerText += value;
+            displayTwo.innerText += value;
         }
 
     });
 }
 
- document.addEventListener('keypress',function(event)
+
+    document.addEventListener('keypress',function(event)
     {
         var value = event.keyCode;
 
@@ -103,6 +117,7 @@ for(var i=0; i<buttons.length; i++)
             operator = '+';
             operand1 = parseFloat(display.innerText);
             display.innerText="";
+            displayTwo.innerText += '+'; 
         }
 
         else if(value == 37)
@@ -110,23 +125,28 @@ for(var i=0; i<buttons.length; i++)
             var val = parseFloat(display.innerText);
             val = val/100;
             display.innerText = "";
-            display.innerText = val;           
+            display.innerText = val;
+            displayTwo.innerText = val;            
         }
-     
+
         else if (value == 99)
         {
             operator = null;
             operand1 = null;
             operand2 = null;
             display.innerText = 0;
+            displayTwo.innerText = ""; 
+
         }
+
         
 
         else if(value == 47)
         {
             operator = '/';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";  
+            displayTwo.innerText += '/';          
         }
 
 
@@ -134,14 +154,26 @@ for(var i=0; i<buttons.length; i++)
         {
             operator = '*';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";     
+            displayTwo.innerText += '*';       
+        }
+
+        else if(value == 99)
+        {
+            operator = null;
+            operand1 = null;
+            operand2 = null;
+            display.innerText = 0;
+            displayTwo.innerText = "";
+
         }
         
         else if(value == 45)
         {
             operator = '-';
             operand1 = parseFloat(display.innerText);
-            display.innerText="";           
+            display.innerText="";     
+            displayTwo.innerText += '-';       
         }
 
         else if(value == 13)
@@ -157,7 +189,9 @@ for(var i=0; i<buttons.length; i++)
 
            }
            display.innerText="";
+           displayTwo.innerText += '='; 
            display.innerText= result;
+           displayTwo.innerText += result; 
            operand1 = result;
            operator = null;
            operand2 = null;
@@ -173,9 +207,11 @@ for(var i=0; i<buttons.length; i++)
             }
 
             display.innerText += value-48;
+            displayTwo.innerText += value-48;
         }
         else{
-            display.innerText = "error"
+            display.innerText = "error";
+            displayTwo.innerText += "error";
         }
 
     });
