@@ -66,6 +66,11 @@
     background-color: aliceblue;
 }
 
+.button:hover
+{
+background-color:white;
+}
+
 #digit-0
 {
     width:115px;
